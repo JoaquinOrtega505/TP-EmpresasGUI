@@ -103,6 +103,12 @@ public class VistaEmpresas extends javax.swing.JFrame{
         jcEmpresa.setToolTipText("");
 
         jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Jefe", "Administrativo" }));
+        jcCategoria.setSelectedIndex(-1);
+        jcCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcCategoriaActionPerformed(evt);
+            }
+        });
 
         jBMostrarEmpleado.setText("Mostrar Empleados");
         jBMostrarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -565,6 +571,10 @@ public class VistaEmpresas extends javax.swing.JFrame{
          
         
     }//GEN-LAST:event_jBMostrarEmpleadoMouseClicked
+
+    private void jcCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcCategoriaActionPerformed
 
     
     /**
