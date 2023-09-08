@@ -7,6 +7,8 @@ package tp.empresasgui;
 
 import java.util.ArrayList;
 
+
+
 /**
  *
  * @author Joaco
@@ -14,12 +16,13 @@ import java.util.ArrayList;
 public class Empresa {
     private String razonSocial;
     private int cuit;
-    private ArrayList<Empleado> empleado;
+    private ArrayList<Empleado> empleados ;
+    
 
-    public Empresa(String razonSocial, int cuit, ArrayList<Empleado> empleado) {
+    public Empresa(String razonSocial, int cuit) {
         this.razonSocial = razonSocial;
         this.cuit = cuit;
-        this.empleado = empleado;
+       
     }
 
     public String getRazonSocial() {
@@ -38,18 +41,22 @@ public class Empresa {
         this.cuit = cuit;
     }
 
-    public ArrayList<Empleado> getEmpleado() {
-        return empleado;
+    public ArrayList<Empleado> getEmpleados() {
+        return empleados;
     }
 
-    public void setEmpleado(ArrayList<Empleado> empleado) {
-        this.empleado = empleado;
+    public void setEmpleados(ArrayList<Empleado> empleados) {
+        this.empleados = empleados;
     }
+
+   
+
+   
+
     
-    public void agregarEmpleado(Empleado e){
+    
+    
+   
         
-    }
-    public void mostrarEmpleados(){
-        
-    }
+    
 }

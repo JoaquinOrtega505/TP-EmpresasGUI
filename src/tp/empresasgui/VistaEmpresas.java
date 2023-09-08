@@ -5,20 +5,34 @@
  */
 package tp.empresasgui;
 
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Joaco
  */
-public class VistaEmpresas extends javax.swing.JFrame {
 
+public class VistaEmpresas extends javax.swing.JFrame{
+
+    private Component datos;
+
+    
+
+        
     /**
      * Creates new form VistaEmpresas
      */
     public VistaEmpresas() {
+        this.empresas = new ArrayList<>();
+        this.listaDeEmpleados = new ArrayList<>();
         initComponents();
+        /*listaDeEmpleados = new ArrayList<>();*/
     }
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +57,8 @@ public class VistaEmpresas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jcEmpresa = new javax.swing.JComboBox<>();
         jcCategoria = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBMostrarEmpleado = new javax.swing.JButton();
+        jBGuardar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jInternalFrame2 = new javax.swing.JInternalFrame();
         jLabel8 = new javax.swing.JLabel();
@@ -86,11 +100,23 @@ public class VistaEmpresas extends javax.swing.JFrame {
 
         jLabel6.setText("Empresa");
 
+        jcEmpresa.setToolTipText("");
+
         jcCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Jefe", "Administrativo" }));
 
-        jButton1.setText("Mostrar Empleados");
+        jBMostrarEmpleado.setText("Mostrar Empleados");
+        jBMostrarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBMostrarEmpleadoMouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("Guardar");
+        jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
@@ -124,7 +150,7 @@ public class VistaEmpresas extends javax.swing.JFrame {
                                         .addComponent(jcEmpresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jtSueldo)
                                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
+                                        .addComponent(jBMostrarEmpleado)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addContainerGap())
                     .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -132,7 +158,7 @@ public class VistaEmpresas extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
+                .addComponent(jBGuardar)
                 .addGap(174, 174, 174))
             .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
@@ -167,8 +193,8 @@ public class VistaEmpresas extends javax.swing.JFrame {
                     .addComponent(jcEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jBMostrarEmpleado)
+                    .addComponent(jBGuardar))
                 .addGap(25, 25, 25))
             .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jInternalFrame1Layout.createSequentialGroup()
@@ -292,6 +318,18 @@ public class VistaEmpresas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private ArrayList<Empresa> empresas;
+    private ArrayList<Empleado> listaDeEmpleados;
+    
+    private Empresa buscarEmpresa(String razonSocial) {
+        for (Empresa empresa : empresas) {
+            if (empresa.getRazonSocial().equals(razonSocial)) {
+                return empresa;
+            }
+        }
+        return null;
+    }
+    
     private void jtDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDocumentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtDocumentoActionPerformed
@@ -302,9 +340,15 @@ public class VistaEmpresas extends javax.swing.JFrame {
 
     private void jbCrearEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearEmpresaActionPerformed
         // TODO add your handling code here:
-        try{ String razonSocial= jtRazonSocial.getText();
+        try{ 
+            String razonSocial= jtRazonSocial.getText();
         String cuit = jtCuit.getText();
         int cuitInt = Integer.parseInt(cuit);
+       
+       Empresa empresa = new Empresa (razonSocial, cuitInt );
+      empresas.add(empresa);
+      jcEmpresa.addItem(empresa.getRazonSocial());
+       
          JOptionPane.showMessageDialog(this, "La Carga se realizo con exito");       
         }catch(NumberFormatException nf){
             JOptionPane.showMessageDialog(this, "El Cuit debe ser un numero");
@@ -313,8 +357,216 @@ public class VistaEmpresas extends javax.swing.JFrame {
         }
         jtRazonSocial.setText("");
         jtCuit.setText("");
+
     }//GEN-LAST:event_jbCrearEmpresaActionPerformed
 
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+          
+        try {
+        String dni = jtDocumento.getText();
+        String nombre = jtNombre.getText();
+        String apellido = jtApellido.getText();
+        String categoria = (String) jcCategoria.getSelectedItem();
+        String empresa = (String) jcEmpresa.getSelectedItem();
+        String sueldo = (String) jtSueldo.getText();
+
+        Empleado empleado = new Empleado(dni, nombre, apellido, categoria, empresa, sueldo, listaDeEmpleados);
+        
+        listaDeEmpleados.add(empleado);
+        
+
+        
+        System.out.println("Empleado guardado:");
+        System.out.println("DNI: " + dni);
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Apellido: " + apellido);
+        System.out.println("Categoría: " + categoria);
+        System.out.println("Empresa: " + empresa);
+        System.out.println("Sueldo: " + sueldo);
+
+        JOptionPane.showMessageDialog(this, "Empleado guardado");
+
+        jtDocumento.setText("");
+        jtNombre.setText("");
+        jtApellido.setText("");
+        jcCategoria.setSelectedItem(null); // Limpia el combo box
+        jcEmpresa.setSelectedItem(null); // Limpia el combo box
+        jtSueldo.setText("");
+    } catch (NumberFormatException nf) {
+        JOptionPane.showMessageDialog(this, "Ingrese el Sueldo", "Error", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+
+
+
+
+
+
+
+//        try{
+//                String dni = jtDocumento.getText();
+//                String nombre = jtNombre.getText();
+//                String apellido = jtApellido.getText();
+//                String categoria = (String) jcCategoria.getSelectedItem();
+//                String empresa = (String) jcEmpresa.getSelectedItem();
+//                String sueldo = (String) jtSueldo.getText();
+//
+//                Empleado nvoEmpleado = new Empleado(dni, nombre, apellido, categoria, empresa, sueldo, listaDeEmpleados);
+//
+//            
+//            JOptionPane.showMessageDialog(this, "empleado guardado");
+//           
+//            jtDocumento.setText("");
+//            jtNombre.setText("");
+//            jtApellido.setText("");
+//            jcCategoria.setSelectedItem(null); // Limpia el combo box
+//            jcEmpresa.setSelectedItem(null); // Limpia el combo box
+//            jtSueldo.setText("");
+//        } catch (NumberFormatException nf){
+//        JOptionPane.showMessageDialog(this, "ingrese numeros en el campo sueldo");
+//        }
+//        
+//        
+        
+//       String empresaSeleccionada = (String) jcEmpresa.getSelectedItem();
+//       String empresa = (String) jcEmpresa.getSelectedItem();
+//
+//        String dni = jtDocumento.getText();
+//        String nombre = jtNombre.getText();
+//        String apellido = jtApellido.getText();
+//        String categoria = (String) jcCategoria.getSelectedItem();
+//       // String empresa = (String) jcEmpresa.getSelectedItem();
+//        double sueldo = Double.parseDouble(jtSueldo.getText());
+        
+
+
+        
+       //Empleado empleado = new Empleado(dni, nombre, apellido, categoria, sueldo,empresa);
+    
+       
+        
+    
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBMostrarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBMostrarEmpleadoMouseClicked
+      
+    // Obtener la empresa seleccionada
+    String empresaSeleccionada = (String) jcEmpresa.getSelectedItem();
+
+    // Buscar la empresa seleccionada en la lista de empresas
+    Empresa empresa = buscarEmpresa(empresaSeleccionada);
+
+    if (empresa != null) {
+        // Obtener la lista de empleados asociados a la empresa
+        ArrayList<Empleado> empleadosEmpresa = empresa.getEmpleados();
+        
+
+        if (!empleadosEmpresa.isEmpty()) {
+            // Mostrar un cuadro emergente para seleccionar un empleado de la empresa
+            String[] empleadosNombres = new String[empleadosEmpresa.size()];
+            for (int i = 0; i < empleadosEmpresa.size(); i++) {
+                empleadosNombres[i] = empleadosEmpresa.get(i).getNombre() + " " + empleadosEmpresa.get(i).getApellido();
+            }
+
+            String empleadoSeleccionado = (String) JOptionPane.showInputDialog(this, "Selecciona un empleado:", "Empleados de " + empresa.getRazonSocial(), JOptionPane.PLAIN_MESSAGE, null, empleadosNombres, empleadosNombres[0]);
+
+            // Buscar el empleado seleccionado
+            Empleado empleado = null;
+            for (Empleado emp : empleadosEmpresa) {
+                if ((emp.getNombre() + " " + emp.getApellido()).equals(empleadoSeleccionado)) {
+                    empleado = emp;
+                    break;
+                }
+            }
+
+            // Mostrar los datos del empleado seleccionado
+            if (empleado != null) {
+                String mensaje = "Nombre: " + empleado.getNombre() + "\n" +
+                                 "Apellido: " + empleado.getApellido() + "\n" +
+                                 "Categoría: " + empleado.getCategoria() + "\n" +
+                                 "Sueldo: " + empleado.getSueldo() + "\n" +
+                                 "Empresa: " + empleado.getEmpresa();
+
+                JOptionPane.showMessageDialog(this, mensaje, "Datos del Empleado", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay empleados registrados para esta empresa.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "La empresa seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+                                                 
+//    // Obtener los valores de los campos de entrada
+//    String nombre = jtNombre.getText();
+//    String apellido = jtApellido.getText();
+//    String categoria = (String) jcCategoria.getSelectedItem();
+//    String sueldoStr = jtSueldo.getText();
+//    String empresaSeleccionada = (String) jcEmpresa.getSelectedItem();
+//    
+//    try {
+//        // Convertir el sueldo a double
+//        double sueldo = Double.parseDouble(sueldoStr);
+//        
+//        // Buscar la empresa seleccionada en la lista de empresas
+//        Empresa empresa = buscarEmpresa(empresaSeleccionada);
+//        
+//        // Crear un nuevo empleado con los datos ingresados
+//        Empleado empleado = new Empleado(nombre, apellido, categoria, sueldo, empresa);
+//        
+//        // Mostrar un cuadro emergente con los datos del empleado
+//        String mensaje = "Nombre: " + empleado.getNombre() + "\n" +
+//                         "Apellido: " + empleado.getApellido() + "\n" +
+//                         "Categoría: " + empleado.getCategoria() + "\n" +
+//                         "Sueldo: " + empleado.getSueldo() + "\n" +
+//                         "Empresa: " + empleado.getEmpresa();
+//        
+//        JOptionPane.showMessageDialog(this, mensaje, "Datos del Empleado", JOptionPane.INFORMATION_MESSAGE);
+//        
+////        // Limpiar los campos de entrada
+////        jtNombre.setText("");
+////        jtApellido.setText("");
+////        jtSueldo.setText("");
+//    } catch (NumberFormatException e) {
+//        // Manejar una excepción si el sueldo no es un número válido
+//        JOptionPane.showMessageDialog(this, "El sueldo debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+//    } catch (NullPointerException e) {
+//        // Manejar una excepción si la empresa seleccionada no se encuentra en la lista de empresas
+//        JOptionPane.showMessageDialog(this, "La empresa seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+//
+
+
+//String empresaCbox=(String) jcEmpresa.getSelectedItem();
+//        if(empresaCbox != null && !empresaCbox.isEmpty()){
+//                String dato = "";
+//                for (Empleado empleado: listaDeEmpleados){
+//                    if (empleado.getEmpresa().equals(empresaCbox)) {
+//                        dato += "DNI: " + empleado.getDni() + "\n";
+//                        dato += "Nombre y Apellido: " + empleado.getNombre() + " " + empleado.getApellido() + "\n";
+//                        dato += "Categoría: " + empleado.getCategoria() + "\n";                        
+//                        dato += "Sueldo: " +empleado.getSueldo();
+//           }
+//                    JOptionPane.showMessageDialog(this, dato, "Empleado de: " + empresaCbox, JOptionPane.INFORMATION_MESSAGE);
+//        }
+////                if(!dato.isEmpty()){
+////                    JOptionPane.showMessageDialog(this, dato, "empleado de: " + empresaCbox, JOptionPane.INFORMATION_MESSAGE);
+////                }else{
+////                    JOptionPane.showMessageDialog(datos, "Esta empresa no tiene empleados");
+////                }
+////        }else{
+////            JOptionPane.showMessageDialog(datos, "Seleccione Una Empresa");
+//        }
+//
+//        
+//              
+            
+         
+        
+    }//GEN-LAST:event_jBMostrarEmpleadoMouseClicked
+
+    
     /**
      * @param args the command line arguments
      */
@@ -343,16 +595,14 @@ public class VistaEmpresas extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaEmpresas().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new VistaEmpresas().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBMostrarEmpleado;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
@@ -380,4 +630,6 @@ public class VistaEmpresas extends javax.swing.JFrame {
     private javax.swing.JTextField jtRazonSocial;
     private javax.swing.JTextField jtSueldo;
     // End of variables declaration//GEN-END:variables
+
+
 }

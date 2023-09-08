@@ -5,32 +5,43 @@
  */
 package tp.empresasgui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Joaco
  */
-class Empleado {
-    private int dni;
+public class Empleado {
+    private String dni;
     private String nombre;
     private String apellido;
     private String categoria;
-    private double sueldo;
-    Empresa empresa;
+    private String sueldo;
+    private String empresa;
+    private List<Empleado> listaDeEmpleados;
 
-    public Empleado(int dni, String nombre, String apellido, String categoria, double sueldo, Empresa empresa) {
+    public Empleado(String dni, String nombre, String apellido, String categoria, String sueldo, String empresa, List<Empleado> listaDeEmpleados) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.categoria = categoria;
         this.sueldo = sueldo;
         this.empresa = empresa;
+        this.listaDeEmpleados = listaDeEmpleados;
     }
 
-    public int getDni() {
+   
+
+   
+
+      
+
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
@@ -58,22 +69,36 @@ class Empleado {
         this.categoria = categoria;
     }
 
-    public double getSueldo() {
+    public String getSueldo() {
         return sueldo;
     }
 
-    public void setSueldo(double sueldo) {
+    public void setSueldo(String sueldo) {
         this.sueldo = sueldo;
     }
 
-    public Empresa getEmpresa() {
+    public String getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Empresa empresa) {
+    public void setEmpresa(String empresa) {
         this.empresa = empresa;
+    }
+
+    public List<Empleado> getListaDeEmpleados() {
+        return listaDeEmpleados;
+    }
+
+    public void setListaDeEmpleados(List<Empleado> listaDeEmpleados) {
+        this.listaDeEmpleados = listaDeEmpleados;
     }
     
     
+
     
-}
+
+    
+        
+    }
+    
+
