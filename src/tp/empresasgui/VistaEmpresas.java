@@ -403,56 +403,56 @@ public class VistaEmpresas extends javax.swing.JFrame{
 
     private void jBMostrarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBMostrarEmpleadoMouseClicked
       
-    // Obtener la empresa seleccionada
-//    String empresaSeleccionada = (String) jcEmpresa.getSelectedItem();
-//
-//    // Buscar la empresa seleccionada en la lista de empresas
-//    Empresa empresa = buscarEmpresa(empresaSeleccionada);
-//  
-//    if (empresa != null) {
+     Obtener la empresa seleccionada
+    String empresaSeleccionada = (String) jcEmpresa.getSelectedItem();
+
+    // Buscar la empresa seleccionada en la lista de empresas
+    Empresa empresa = buscarEmpresa(empresaSeleccionada);
+  
+    if (empresa != null) {
         
-        // Obtener la lista de empleados asociados a la empresa
-//        ArrayList<Empleado> empleadosEmpresa = empresa.getEmpleados();
-//
-//        if (empleadosEmpresa != null&& empleadosEmpresa.isEmpty()) {
-//              JOptionPane.showMessageDialog(null, "2");
-//            // Mostrar un cuadro emergente para seleccionar un empleado de la empresa
-//            String[] empleadosNombres = new String[empleadosEmpresa.size()];
-//            for (int i = 0; i < empleadosEmpresa.size(); i++) {
-//                  JOptionPane.showMessageDialog(null, "3");
-//                empleadosNombres[i] = empleadosEmpresa.get(i).getNombre() + " " + empleadosEmpresa.get(i).getApellido();
-//            }
-//            System.out.println("que onda?");  JOptionPane.showMessageDialog(null, "4");
-//
-//            String empleadoSeleccionado = (String) JOptionPane.showInputDialog(this, "Selecciona un empleado:", "Empleados de " + empresa.getRazonSocial(), JOptionPane.PLAIN_MESSAGE, null, empleadosNombres, empleadosNombres[0]);
-//
-//            // Buscar el empleado seleccionado
-//            Empleado empleado = null;
-//            for (Empleado emp : empleadosEmpresa) {
-//                if ((emp.getNombre() + " " + emp.getApellido()).equals(empleadoSeleccionado)) {
-//                    empleado = emp;
-//                      JOptionPane.showMessageDialog(null, "5");
-//                    break;
-//                }
-//            }
-//
-//            // Mostrar los datos del empleado seleccionado
-//            if (empleado != null) {
-//                String mensaje = "Nombre: " + empleado.getNombre() + "\n" +
-//                                 "Apellido: " + empleado.getApellido() + "\n" +
-//                                 "Categoría: " + empleado.getCategoria() + "\n" +
-//                                 "Sueldo: " + empleado.getSueldo() + "\n" +
-//                                 "Empresa: " + empleado.getEmpresa();
-//
-//                JOptionPane.showMessageDialog(this, mensaje, "Datos del Empleado", JOptionPane.INFORMATION_MESSAGE);
-//            }
-//        }
-//        else {
-//            JOptionPane.showMessageDialog(this, "No hay empleados registrados para esta empresa.", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    } else {
-//        JOptionPane.showMessageDialog(this, "La empresa seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
-//    }
+         Obtener la lista de empleados asociados a la empresa
+        ArrayList<Empleado> empleadosEmpresa = empresa.getEmpleados();
+
+        if (empleadosEmpresa != null&& empleadosEmpresa.isEmpty()) {
+              JOptionPane.showMessageDialog(null, "2");
+            // Mostrar un cuadro emergente para seleccionar un empleado de la empresa
+            String[] empleadosNombres = new String[empleadosEmpresa.size()];
+            for (int i = 0; i < empleadosEmpresa.size(); i++) {
+                  JOptionPane.showMessageDialog(null, "3");
+                empleadosNombres[i] = empleadosEmpresa.get(i).getNombre() + " " + empleadosEmpresa.get(i).getApellido();
+            }
+            System.out.println("que onda?");  JOptionPane.showMessageDialog(null, "4");
+
+            String empleadoSeleccionado = (String) JOptionPane.showInputDialog(this, "Selecciona un empleado:", "Empleados de " + empresa.getRazonSocial(), JOptionPane.PLAIN_MESSAGE, null, empleadosNombres, empleadosNombres[0]);
+
+            // Buscar el empleado seleccionado
+            Empleado empleado = null;
+            for (Empleado emp : empleadosEmpresa) {
+                if ((emp.getNombre() + " " + emp.getApellido()).equals(empleadoSeleccionado)) {
+                    empleado = emp;
+                      JOptionPane.showMessageDialog(null, "5");
+                    break;
+                }
+            }
+
+            // Mostrar los datos del empleado seleccionado
+            if (empleado != null) {
+                String mensaje = "Nombre: " + empleado.getNombre() + "\n" +
+                                 "Apellido: " + empleado.getApellido() + "\n" +
+                                 "Categoría: " + empleado.getCategoria() + "\n" +
+                                 "Sueldo: " + empleado.getSueldo() + "\n" +
+                                 "Empresa: " + empleado.getEmpresa();
+
+                JOptionPane.showMessageDialog(this, mensaje, "Datos del Empleado", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "No hay empleados registrados para esta empresa.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "La empresa seleccionada no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
 
            
